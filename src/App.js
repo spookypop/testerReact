@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+//全局文件
+import './main';
+//路由
+import {BrowserRouter} from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+//布局组件
+import CustomMenu from "./components/Menu/index";//导航
+import ContentMain from "./components/ComtentMain/index"//主题
+
+//UI-antd-按需引入
+import 'antd/dist/antd.css';
+import {Layout } from 'antd';
+
+const {
+	Sider, Content,
+} = Layout;
+
+let screenHeight= window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+class App extends Component {
+	render() {
+		return (
+			<div className="App" >
+				<BrowserRouter>
+					<Layout>
+						<Sider className="App-customMenu" style={{height:screenHeight}}>
+							<CustomMenu/>
+						</Sider>
+						<Layout>
+							{/*<Header>Header</Header>*/}
+							<Content className="App-contentMain" style={{height:screenHeight}}>
+								<ContentMain/>
+							</Content>
+							{/*<Footer>Footer</Footer>*/}
+						</Layout>
+					</Layout>
+				</BrowserRouter>
+			</div>
+		);
+	}
 }
-
 export default App;
